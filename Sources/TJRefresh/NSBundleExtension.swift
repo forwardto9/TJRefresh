@@ -18,13 +18,17 @@ public extension Bundle {
     }
     
     class func arrowImage() -> UIImage {
-        return UIImage(contentsOfFile: refreshBunle().path(forResource: "arrow@2x", ofType: "png")!)!.withRenderingMode(.alwaysTemplate)
+//        return UIImage(contentsOfFile: refreshBunle().path(forResource: "arrow@2x", ofType: "png")!)!.withRenderingMode(.alwaysTemplate)
+        
+        let picture = Bundle.module.path(forResource: "arrow@2x", ofType: "png")
+        return UIImage(contentsOfFile:picture!)!.withRenderingMode(.alwaysTemplate)
     }
     
     class func localizedString(_ key: String) -> String {
         return localizedString(key, nil)
     }
     class func localizedString(_ key: String, _ value: String?) -> String {
+        #if false
         // （iOS获取的语言字符串比较不稳定）目前框架只处理en、zh-Hans、zh-Hant三种情况，其他按照系统默认处理
         var language = NSLocale.preferredLanguages.first ?? ""
         if language.hasPrefix("en") {
@@ -41,5 +45,8 @@ public extension Bundle {
         let bundle = Bundle(path: refreshBunle().path(forResource: language, ofType: "lproj")!)
         let value = bundle?.localizedString(forKey: key, value: value, table: nil)
         return Bundle.main.localizedString(forKey: key, value: value, table: nil)
+        #endif
+        let value = NSLocalizedString(key, bundle: Bundle.module, comment:"")
+        return value
     }
 }
