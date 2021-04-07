@@ -4,6 +4,7 @@
 //
 //  Created by LEE on 2018/8/18.
 //  Copyright © 2018年 LEE. All rights reserved.
+//  Update by uweiyuan on 2021/04/07
 //
 
 #if canImport(UIKit)
@@ -59,7 +60,7 @@ open class JRefreshComponent: UIView {
     /// 记录scrollView刚开始的inset
     var scrollViewOriginalInset: UIEdgeInsets?
     ///父控件
-    private(set) var scrollView: UIScrollView?
+    private(set) weak var scrollView: UIScrollView?
     
     //MARK: - 其他
     ///拉拽的百分比(交给子类重写)
