@@ -12,7 +12,7 @@ import UIKit
 #endif
 
 extension UIView {
-    var x: CGFloat {
+    var tj_x: CGFloat {
         set(newX) {
             var frame = self.frame
             frame.origin.x = newX
@@ -22,7 +22,7 @@ extension UIView {
             return self.frame.origin.x
         }
     }
-    var y: CGFloat {
+    var tj_y: CGFloat {
         set(newY) {
             var frame = self.frame
             frame.origin.y = newY
@@ -32,7 +32,7 @@ extension UIView {
             return self.frame.origin.y
         }
     }
-    var width: CGFloat {
+    var tj_width: CGFloat {
         set(newWidth) {
             var frame = self.frame
             frame.size.width = newWidth
@@ -42,7 +42,7 @@ extension UIView {
             return self.frame.size.width
         }
     }
-    var height: CGFloat {
+    var tj_height: CGFloat {
         set(newHeight) {
             var frame = self.frame
             frame.size.height = newHeight
@@ -52,7 +52,7 @@ extension UIView {
             return self.frame.size.height
         }
     }
-    var size: CGSize {
+    var tj_size: CGSize {
         set(newSize) {
             var frame = self.frame
             frame.size = newSize
@@ -62,7 +62,7 @@ extension UIView {
             return self.frame.size
         }
     }
-    var origin: CGPoint {
+    var tj_origin: CGPoint {
         set(newOrigin) {
             var frame = self.frame
             frame.origin = newOrigin

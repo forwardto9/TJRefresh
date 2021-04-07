@@ -30,7 +30,7 @@ open class JRefreshHeader: JRefreshComponent {
     ///忽略多少scrollView的contentInset的top
     public var ignoredScrollViewContentInsetTop: CGFloat = 0 {
         didSet {
-            self.y = -self.height - ignoredScrollViewContentInsetTop
+            self.tj_y = -self.tj_height - ignoredScrollViewContentInsetTop
         }
     }
     
@@ -54,7 +54,7 @@ open class JRefreshHeader: JRefreshComponent {
                 
                 // 恢复inset和offset
                 UIView.animate(withDuration: JRefreshConst.slowAnimationDuration, animations: {
-                    self.scrollView?.insetTop += self.insetTDelta ?? 0
+                    self.scrollView?.tj_insetTop += self.insetTDelta ?? 0
                     // 自动调整透明度
                     if self.automaticallyChangeAlpha ?? false {
                         self.alpha = 0.0
@@ -67,9 +67,9 @@ open class JRefreshHeader: JRefreshComponent {
                 DispatchQueue.main.async { [weak self] in
                     guard let `self` = self, let scrollViewOriginalInset = self.scrollViewOriginalInset, let scrollView = self.scrollView else {return}
                     UIView.animate(withDuration: JRefreshConst.fastAnimationDuration, animations: {
-                        let top = scrollViewOriginalInset.top + self.height
+                        let top = scrollViewOriginalInset.top + self.tj_height
                         // 增加滚动区域top
-                        scrollView.insetTop = top
+                        scrollView.tj_insetTop = top
                         // 设置滚动位置
                         var offset = scrollView.contentOffset
                         offset.y = -top
@@ -93,12 +93,12 @@ extension JRefreshHeader {
         // 设置key
         lastUpdatedTimeKey = JRefreshHead.lastUpdateTimeKey
         // 设置高度
-        height = JRefreshConst.headerHeight
+        tj_height = JRefreshConst.headerHeight
     }
     override open func placeSubviews() {
         super.placeSubviews()
         // 设置y值(当自己的高度发生改变了，肯定要重新调整Y值，所以放到placeSubviews方法中设置y值)
-        y = -height - ignoredScrollViewContentInsetTop
+        tj_y = -tj_height - ignoredScrollViewContentInsetTop
     }
     
     override open func scrollViewContentOffsetDidChange(_ change: [NSKeyValueChangeKey : Any]?) {
@@ -109,17 +109,17 @@ extension JRefreshHeader {
             // 暂时保留
             if window == nil {return}
             // sectionheader停留解决
-            var insetT = -scrollView.offsetY > scrollViewOriginalInset.top ? -scrollView.offsetY : scrollViewOriginalInset.top
-            insetT = insetT > (height + scrollViewOriginalInset.top) ? height + scrollViewOriginalInset.top : insetT
-            scrollView.insetTop = insetT
+            var insetT = -scrollView.tj_offsetY > scrollViewOriginalInset.top ? -scrollView.tj_offsetY : scrollViewOriginalInset.top
+            insetT = insetT > (tj_height + scrollViewOriginalInset.top) ? tj_height + scrollViewOriginalInset.top : insetT
+            scrollView.tj_insetTop = insetT
             insetTDelta = scrollViewOriginalInset.top - insetT
             return
         }
         // 跳转到下一个控制器时，contentInset可能会变
-        scrollViewOriginalInset = scrollView.inset
+        scrollViewOriginalInset = scrollView.tj_inset
         
          // 当前的contentOffset
-        let offsetY = scrollView.offsetY
+        let offsetY = scrollView.tj_offsetY
         // 头部控件刚好出现的offsetY
         let happenOffsetY = -scrollViewOriginalInset.top
         
@@ -128,8 +128,8 @@ extension JRefreshHeader {
             return
         }
         // 普通 和 即将刷新 的临界点
-        let normal2pullingOffsetY = happenOffsetY - height
-        let pullingPercent = (happenOffsetY - offsetY) / height
+        let normal2pullingOffsetY = happenOffsetY - tj_height
+        let pullingPercent = (happenOffsetY - offsetY) / tj_height
         // 如果正在拖拽
         if scrollView.isDragging {
             self.pullingPercent = pullingPercent

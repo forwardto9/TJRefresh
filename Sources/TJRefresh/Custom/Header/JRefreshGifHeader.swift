@@ -79,8 +79,8 @@ extension JRefreshGifHeader {
         stateDurations[state.hashValue] = duration
         // 根据图片设置控件的高度
         let image = images.first
-        if image?.size.height ?? 0 > height {
-            height = image?.size.height ?? 0
+        if image?.size.height ?? 0 > tj_height {
+            tj_height = image?.size.height ?? 0
         }
     }
     public func setImages(_ images: Array<UIImage>, _ state: JRefreshState) {
@@ -112,7 +112,7 @@ extension JRefreshGifHeader {
                 timeWidth = lastUpdatedTimeLabel.textWidth()
             }
             let textWidth = max(stateWidth, timeWidth)
-            gifView.width = width * 0.5 - textWidth * 0.5 - labelLeftInset
+            gifView.tj_width = tj_width * 0.5 - textWidth * 0.5 - labelLeftInset
         }
     }
 }

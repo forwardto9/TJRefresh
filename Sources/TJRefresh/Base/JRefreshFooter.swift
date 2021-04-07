@@ -27,7 +27,7 @@ extension JRefreshFooter {
     override open func prepare() {
         super.prepare()
         // 设置自己的高度
-        height = JRefreshConst.footerHeight
+        tj_height = JRefreshConst.footerHeight
     }
 }
 //MARK: - 公共方法

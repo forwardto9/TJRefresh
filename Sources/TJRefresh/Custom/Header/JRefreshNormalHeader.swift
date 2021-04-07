@@ -141,7 +141,7 @@ extension JRefreshNormalHeader {
         super.placeSubviews()
         
         //箭头的中心点
-        var arrowCenterX = width * 0.5
+        var arrowCenterX = tj_width * 0.5
         if !stateLabel.isHidden {
             let stateWidth = stateLabel.textWidth()
             var timeWidth: CGFloat = 0.0
@@ -151,7 +151,7 @@ extension JRefreshNormalHeader {
             let textWidth = max(stateWidth, timeWidth)
             arrowCenterX -= textWidth / 2.0 + labelLeftInset
         }
-        let arrowCenterY = height * 0.5
+        let arrowCenterY = tj_height * 0.5
         let arrowCenter = CGPoint(x: arrowCenterX, y: arrowCenterY)
         
         // 箭头

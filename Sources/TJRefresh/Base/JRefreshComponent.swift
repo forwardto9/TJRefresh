@@ -118,15 +118,15 @@ open class JRefreshComponent: UIView {
         removeObservers()
         
         //设置宽度
-        width = newSuperview.width
+        tj_width = newSuperview.tj_width
         //设置位置
-        x = -(scrollView?.insetLeft ?? 0)
+        tj_x = -(scrollView?.tj_insetLeft ?? 0)
         // 记录UIScrollView
         scrollView = newSuperview as? UIScrollView
         // 设置永远支持垂直弹簧效果
         scrollView?.alwaysBounceVertical = true
         // 记录UIScrollView最开始的contentInset
-        scrollViewOriginalInset = scrollView?.inset
+        scrollViewOriginalInset = scrollView?.tj_inset
         
         //添加监听
         addObservers()

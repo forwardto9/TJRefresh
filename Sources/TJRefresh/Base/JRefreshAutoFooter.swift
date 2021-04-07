@@ -51,10 +51,10 @@ open class JRefreshAutoFooter: JRefreshFooter {
             
             if !lastHidden && newHidden {
                 state = .Idle
-                scrollView?.insetBottom -= height
+                scrollView?.tj_insetBottom -= tj_height
             } else if lastHidden && !newHidden {
-                scrollView?.insetBottom += height
-                y = scrollView?.contentH ?? 0
+                scrollView?.tj_insetBottom += tj_height
+                tj_y = scrollView?.tj_contentH ?? 0
             }
         }
         get {
@@ -72,13 +72,13 @@ extension JRefreshAutoFooter {
         super.willMove(toSuperview: newSuperview)
         if newSuperview != nil {
             if isHidden == false {
-                scrollView?.insetBottom += height
+                scrollView?.tj_insetBottom += tj_height
             }
             // 设置位置
-            y = scrollView?.contentH ?? 0
+            tj_y = scrollView?.tj_contentH ?? 0
         } else {// 被移除了
             if isHidden == false {
-                scrollView?.insetBottom -= height
+                scrollView?.tj_insetBottom -= tj_height
             }
         }
     }
@@ -87,16 +87,16 @@ extension JRefreshAutoFooter {
         super.scrollViewContentSizeDidChange(change)
         
         // 设置位置
-        y = scrollView?.contentH ?? 0
+        tj_y = scrollView?.tj_contentH ?? 0
     }
     override open func scrollViewContentOffsetDidChange(_ change: [NSKeyValueChangeKey : Any]?) {
        super.scrollViewContentOffsetDidChange(change)
-        if state != .Idle || !automaticallyRefresh || y == 0 {
+        if state != .Idle || !automaticallyRefresh || tj_y == 0 {
             return
         }
         guard let scrollView = scrollView else { return }
-        if scrollView.insetTop + scrollView.contentH > scrollView.height {// 内容超过一个屏幕
-            if scrollView.offsetY >= scrollView.contentH - scrollView.height + height * triggerAutomaticallyRefreshPercent + scrollView.insetBottom - height {
+        if scrollView.tj_insetTop + scrollView.tj_contentH > scrollView.tj_height {// 内容超过一个屏幕
+            if scrollView.tj_offsetY >= scrollView.tj_contentH - scrollView.tj_height + tj_height * triggerAutomaticallyRefreshPercent + scrollView.tj_insetBottom - tj_height {
                 guard let change = change else {return}
                 // 防止手松开时连续调用
                 let old = change[NSKeyValueChangeKey.oldKey] as? CGPoint
@@ -115,12 +115,12 @@ extension JRefreshAutoFooter {
         let panState = scrollView.panGestureRecognizer.state
         switch panState {
         case .ended:// 手松开
-            if scrollView.insetTop + scrollView.contentH <= scrollView.height {// 不够一个屏幕
-                if scrollView.offsetY >= scrollView.insetTop {// 向上拽
+            if scrollView.tj_insetTop + scrollView.tj_contentH <= scrollView.tj_height {// 不够一个屏幕
+                if scrollView.tj_offsetY >= scrollView.tj_insetTop {// 向上拽
                     beginRefreshing()
                 }
             } else {
-                if scrollView.offsetY >= scrollView.contentH + scrollView.insetBottom - scrollView.height {
+                if scrollView.tj_offsetY >= scrollView.tj_contentH + scrollView.tj_insetBottom - scrollView.tj_height {
                     beginRefreshing()
                 }
             }

@@ -55,11 +55,11 @@ extension JRefreshAutoNormalFooter {
     override open func placeSubviews() {
         super.placeSubviews()
         // 圈圈
-        var loadingCenterX = width * 0.5
+        var loadingCenterX = tj_width * 0.5
         if !refreshingTitleHidden {
             loadingCenterX -= stateLabel.textWidth() * 0.5 + labelLeftInset
         }
-        let loadingCenterY = height * 0.5
+        let loadingCenterY = tj_height * 0.5
         loadingView.center = CGPoint(x: loadingCenterX, y: loadingCenterY)
     }
 }

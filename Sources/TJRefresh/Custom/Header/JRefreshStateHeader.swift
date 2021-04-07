@@ -134,14 +134,14 @@ extension JRefreshStateHeader {
                 stateLabel.frame = bounds
             }
         } else {
-            let stateLabelH = height * 0.5
+            let stateLabelH = tj_height * 0.5
             // 状态
             if noConstrainsOnStatusLabel {
-                stateLabel.frame = CGRect(x: 0, y: 0, width: width, height: stateLabelH)
+                stateLabel.frame = CGRect(x: 0, y: 0, width: tj_width, height: stateLabelH)
             }
             // 更新时间
             if lastUpdatedTimeLabel.constraints.count == 0 {
-                lastUpdatedTimeLabel.frame = CGRect(x: 0, y: stateLabelH, width: width, height: height - stateLabelH)
+                lastUpdatedTimeLabel.frame = CGRect(x: 0, y: stateLabelH, width: tj_width, height: tj_height - stateLabelH)
             }
         }
     }
