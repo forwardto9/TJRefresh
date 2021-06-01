@@ -14,7 +14,7 @@ import UIKit
 public struct JRefreshConst {
     static let labelLeftInset: CGFloat = 25.0
     static let headerHeight: CGFloat = 54.0
-    static let footerHeight: CGFloat = 44.0
+    static let footerHeight: CGFloat = 64.0
     static let fastAnimationDuration = 0.25
     static let slowAnimationDuration = 0.4
 }
